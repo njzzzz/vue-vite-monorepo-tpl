@@ -1,8 +1,8 @@
 {
-  "name": "@nononocode/client",
+  "name": "@packages/client",
   "type": "module",
   "version": "0.0.1",
-  "description": "nononocode client",
+  "description": "client",
   "author": "njzzzz",
   "license": "ISC",
   "keywords": [],

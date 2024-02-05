@@ -6,7 +6,12 @@
   "keywords": [],
   "main": "index.js",
   "scripts": {
-    "fix": "eslint --fix ."
+    "fix": "eslint --fix .",
+    "clean:node_modules": "find . -name \"node_modules\" -type d -prune -exec rm -r '{}' + ",
+    "build": "pnpm --filter @packages/* run build",
+    "publish-all": "pnpm --filter @packages/* publish --publish-branch release",
+    "dev": "pnpm -r --parallel dev ",
+    "bump": "bumpp -r"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
@@ -18,6 +23,7 @@
     "@vitejs/plugin-vue": "^5.0.3",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "@vue/tsconfig": "^0.5.1",
+    "bumpp": "^9.3.0",
     "eslint": "^8.56.0",
     "lint-staged": "^15.2.1",
     "simple-git-hooks": "^2.9.0",

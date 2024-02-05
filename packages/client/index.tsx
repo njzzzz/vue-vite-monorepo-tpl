@@ -1,3 +1,2 @@
+// if you use unocss, you should keep it
 import 'virtual:uno.css'
-
-export { default as x } from './src/App'
