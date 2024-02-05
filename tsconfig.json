@@ -2,15 +2,10 @@
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
     "composite": true,
+    "rootDir": ".",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["node"],
-    "outDir": "./root"
+    "types": ["node"]
   },
-  "references": [
-    { "path": "./packages/client/tsconfig.json" }
-  ],
-  "include": [
-    "./index.ts"
-  ]
+  "include": ["config/**/*"]
 }
