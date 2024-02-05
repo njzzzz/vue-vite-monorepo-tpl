@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "@tsconfig/node20": "^20.1.2",
+    "@types/node": "^20.11.16",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "^8.56.0"
+  }
+}
