@@ -1,3 +1,4 @@
+import * as process from 'node:process'
 import { NestFactory } from '@nestjs/core'
 import { ValidationPipe } from '@nestjs/common'
 import helmet from 'helmet'
@@ -6,6 +7,7 @@ import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  const PORT = process.env.PORT || 3000
   // swagger
   const config = new DocumentBuilder()
     .setTitle('Nest Base Template')
@@ -19,6 +21,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe())
   // 安全
   app.use(helmet())
-  await app.listen(3000)
+  await app.listen(PORT)
+  console.log(`api docs locate at http://localhost:${PORT}/api_docs`)
 }
 bootstrap()

@@ -1,9 +1,8 @@
-import type { ArgumentsHost } from '@nestjs/common'
-import { Catch, HttpException, Inject } from '@nestjs/common'
+import { ArgumentsHost, Catch, HttpException, Inject } from '@nestjs/common'
 import { BaseExceptionFilter } from '@nestjs/core'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
 import { getReqMainInfo } from 'src/utils'
-import type { Logger } from 'winston'
+import { Logger } from 'winston'
 
 @Catch()
 export default class CommonExceptionFilter extends BaseExceptionFilter {

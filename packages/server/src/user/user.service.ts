@@ -1,60 +1,46 @@
 import { Injectable } from '@nestjs/common'
-import type { Prisma, User } from '@prisma/client'
-import type { PrismaService } from '../prisma/prisma.service'
+import { InjectRepository } from '@nestjs/typeorm'
+import { DataSource, Repository } from 'typeorm'
+import { User } from './user.entity'
+import { CreateUserDto } from './dto/createUser.dto'
+import { LoginUserDto } from './dto/loginUser.dto'
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @InjectRepository(User)
+    private readonly usersRepository: Repository<User>,
+    private dataSource: DataSource,
+  ) {}
 
-  // async user(
-  //   userWhereUniqueInput: Prisma.UserWhereUniqueInput,
-  // ): Promise<User | null> {
-  //   return this.prisma.user.findUnique({
-  //     where: userWhereUniqueInput,
-  //   });
-  // }
-
-  // async users(params: {
-  //   skip?: number;
-  //   take?: number;
-  //   cursor?: Prisma.UserWhereUniqueInput;
-  //   where?: Prisma.UserWhereInput;
-  //   orderBy?: Prisma.UserOrderByWithRelationInput;
-  // }): Promise<User[]> {
-  //   const { skip, take, cursor, where, orderBy } = params;
-  //   return this.prisma.user.findMany({
-  //     skip,
-  //     take,
-  //     cursor,
-  //     where,
-  //     orderBy,
-  //   });
-  // }
-
-  async createUser(data: Prisma.UserCreateInput): Promise<User> {
-    return await this.prisma.user.create({
-      data,
-    })
+  async createUser(data: CreateUserDto): Promise<User> {
+    const user = new User()
+    user.username = data.username
+    user.password = data.password
+    return await this.usersRepository.save(user)
   }
 
-  // async updateUser(params: {
-  //   where: Prisma.UserWhereUniqueInput;
-  //   data: Prisma.UserUpdateInput;
-  // }): Promise<User> {
-  //   const { where, data } = params;
-  //   return this.prisma.user.update({
-  //     data,
-  //     where,
-  //   });
-  // }
+  async login(data: LoginUserDto): Promise<User> {
+    return await this.usersRepository.findOneBy(data)
+  }
 
-  // async deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User> {
-  //   return this.prisma.user.delete({
-  //     where,
-  //   });
-  // }
+  // 【仅示例】事务，创建多个用户
+  async createMany(users: User[]) {
+    const queryRunner = this.dataSource.createQueryRunner()
 
-  async login(data: Prisma.UserCreateInput): Promise<User> {
-    return await this.prisma.user.findFirst({ where: data })
+    await queryRunner.connect()
+    await queryRunner.startTransaction()
+    try {
+      await queryRunner.manager.save(users[0])
+      await queryRunner.manager.save(users[1])
+
+      await queryRunner.commitTransaction()
+    }
+    catch (err) {
+      await queryRunner.rollbackTransaction()
+    }
+    finally {
+      await queryRunner.release()
+    }
   }
 }

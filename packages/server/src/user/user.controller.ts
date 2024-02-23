@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
-import type { Cache } from 'cache-manager'
+import { Cache } from 'cache-manager'
 import {
   ApiBearerAuth,
   ApiBody,
@@ -17,10 +17,10 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
-import type { AuthService } from '../auth/auth.service'
+import { AuthService } from '../auth/auth.service'
 import { JwtGuard } from '../guards/jwt/jwt.guard'
-import type { JwtPayload } from '../auth/jwtPayload.interface'
-import type { UserService } from './user.service'
+import { JwtPayload } from '../auth/jwtPayload.interface'
+import { UserService } from './user.service'
 import { CreateUserDto } from './dto/createUser.dto'
 import { LoginUserDto } from './dto/loginUser.dto'
 import { infoUserDto } from './dto/infoUser.dto'

@@ -1,18 +1,16 @@
-import type {
+import {
   CallHandler,
   ExecutionContext,
-  NestInterceptor,
-} from '@nestjs/common'
-import {
   Inject,
   Injectable,
+  NestInterceptor,
 } from '@nestjs/common'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
-import type { Observable } from 'rxjs'
+import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { getReqMainInfo } from 'src/utils'
-import type { Logger } from 'winston'
-import type { Request } from 'express'
+import { Logger } from 'winston'
+import { Request } from 'express'
 
 export interface Response<T> {
   data: T

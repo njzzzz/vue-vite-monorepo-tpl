@@ -2,7 +2,11 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  unocss: true,
-  typescript: true,
-  jsx: true,
+  typescript: {
+    overrides: {
+      'ts/consistent-type-exports': 'off',
+      'ts/consistent-type-imports': 'off',
+      'no-console': 'off',
+    },
+  },
 })

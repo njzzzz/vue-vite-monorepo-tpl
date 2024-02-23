@@ -1,4 +1,4 @@
-import type { Request } from 'express'
+import { Request } from 'express'
 
 export const getReqMainInfo: (req: Request) => {
   [prop: string]: any

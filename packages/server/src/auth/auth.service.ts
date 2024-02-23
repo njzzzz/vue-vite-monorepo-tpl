@@ -1,10 +1,10 @@
 // auth.service.ts
 
 import { Inject, Injectable } from '@nestjs/common'
-import type { JwtService } from '@nestjs/jwt'
+import { JwtService } from '@nestjs/jwt'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
-import type { Cache } from 'cache-manager'
-import type { JwtPayload } from './jwtPayload.interface'
+import { Cache } from 'cache-manager'
+import { JwtPayload } from './jwtPayload.interface'
 
 @Injectable()
 export class AuthService {

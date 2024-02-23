@@ -1,9 +1,9 @@
 import { Controller, Get, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiTags } from '@nestjs/swagger'
-import type { AppService } from './app.service'
-import type { AuthService } from './auth/auth.service'
-import type { UserService } from './user/user.service'
+import { AppService } from './app.service'
+import { AuthService } from './auth/auth.service'
+import { UserService } from './user/user.service'
 
 @ApiTags('Example')
 @Controller()

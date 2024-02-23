@@ -1,27 +1,25 @@
 import { join } from 'node:path'
 import * as process from 'node:process'
-import type { MiddlewareConsumer, NestModule } from '@nestjs/common'
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
+import { ServeStaticModule } from '@nestjs/serve-static'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
 import { redisStore } from 'cache-manager-redis-store'
-import type { CacheStore } from '@nestjs/cache-manager'
-import { MulterModule } from '@nestjs/platform-express'
-import { ServeStaticModule } from '@nestjs/serve-static'
-import { CacheModule } from '@nestjs/cache-manager'
-import { ConfigModule } from '@nestjs/config'
+import { CacheModule, CacheStore } from '@nestjs/cache-manager'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { WinstonModule } from 'nest-winston'
 import { format, transports } from 'winston'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
+import { MulterModule } from '@nestjs/platform-express'
+
+// import { AppController } from './app.controller'
+// import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
-import { PrismaModule } from './prisma/prisma.module'
 import { TransformInterceptor } from './response/response.interceptor'
 import 'winston-daily-rotate-file'
 import CommonExceptionFilter from './exception/commonException.filter'
 import LoggerMiddleware from './logger/logger.middleware'
-
 import { FileModule } from './file/file.module'
 
 @Module({
@@ -83,20 +81,36 @@ import { FileModule } from './file/file.module'
       url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
       password: process.env.REDIS_PASSWORD,
     }),
+    // mysql
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        return {
+          type: 'mysql',
+          host: configService.get('DB_HOST'),
+          port: +configService.get('DB_PORT'),
+          username: configService.get('DB_USERNAME'),
+          password: configService.get('DB_PASSWORD'),
+          database: configService.get('DB_DATABASE'),
+          autoLoadEntities: true,
+          // 不要在生产环境使用
+          synchronize: true,
+        }
+      },
+    }),
     // 文件上传
     MulterModule.register(),
     // 授权模块
     AuthModule,
     // 用户模块
     UserModule,
-    // prisma连接
-    PrismaModule,
     // 文件模块
     FileModule,
   ],
-  controllers: [AppController],
+  // controllers: [AppController],
   providers: [
-    AppService,
+    // AppService,
     {
       // 全局限流
       provide: APP_GUARD,

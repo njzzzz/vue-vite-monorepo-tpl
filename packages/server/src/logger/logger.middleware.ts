@@ -1,9 +1,8 @@
-import type { NestMiddleware } from '@nestjs/common'
-import { Inject, Injectable } from '@nestjs/common'
-import type { NextFunction, Request, Response } from 'express'
+import { Inject, Injectable, NestMiddleware } from '@nestjs/common'
+import { NextFunction, Request, Response } from 'express'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
 import { getReqMainInfo } from 'src/utils'
-import type { Logger } from 'winston'
+import { Logger } from 'winston'
 
 @Injectable()
 export default class LoggerMiddleware implements NestMiddleware {
