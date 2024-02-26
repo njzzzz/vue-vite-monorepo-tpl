@@ -49,7 +49,7 @@ export class FileController {
   )
   uploadFile(@UploadedFile() file: Express.Multer.File): { url: string } {
     return {
-      url: `/public/upload/${file.filename}`,
+      url: `/upload/${file.filename}`,
     }
   }
 
@@ -77,7 +77,7 @@ export class FileController {
     url: string[]
   } {
     return {
-      url: files.map(file => `/public/upload/${file.filename}`),
+      url: files.map(file => `/upload/${file.filename}`),
     }
   }
 }
