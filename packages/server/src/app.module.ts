@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
 import { redisStore } from 'cache-manager-redis-store'
 import { CacheModule, CacheStore } from '@nestjs/cache-manager'
-import { ConfigModule, ConfigService } from '@nestjs/config'
+import { ConfigModule } from '@nestjs/config'
 import { WinstonModule } from 'nest-winston'
 import { format, transports } from 'winston'
 import { MulterModule } from '@nestjs/platform-express'
@@ -83,16 +83,15 @@ import { FileModule } from './file/file.module'
     }),
     // mysql
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
+      useFactory: () => {
+        const { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USERNAME } = process.env
         return {
           type: 'mysql',
-          host: configService.get('DB_HOST'),
-          port: +configService.get('DB_PORT'),
-          username: configService.get('DB_USERNAME'),
-          password: configService.get('DB_PASSWORD'),
-          database: configService.get('DB_DATABASE'),
+          host: DB_HOST,
+          port: +DB_PORT,
+          username: DB_USERNAME,
+          password: DB_PASSWORD,
+          database: DB_DATABASE,
           autoLoadEntities: true,
           // 不要在生产环境使用
           synchronize: true,

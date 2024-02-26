@@ -21,7 +21,7 @@ export class UserService {
   }
 
   async login(data: LoginUserDto): Promise<User> {
-    return await this.usersRepository.findOneBy(data)
+    return await this.usersRepository.findOneBy({ ...data, isActive: true })
   }
 
   // 【仅示例】事务，创建多个用户

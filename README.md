@@ -8,5 +8,7 @@
 * [X]  commitlint
 * [X]  eslint powerd by @antfu/eslint-config
 * [X]  unocss powerd by @antfu
+* [X]  nestjs
+* [X]  typeorm
 
 ## Usage
