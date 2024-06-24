@@ -1,14 +1,14 @@
 ## This is a monorepo template respository
 
-* [X]  vite
-* [X]  vue@next
-* [X]  typescript
-* [X]  pnpm
-* [X]  npm package publish
-* [X]  commitlint
-* [X]  eslint powerd by @antfu/eslint-config
-* [X]  unocss powerd by @antfu
-* [X]  nestjs
-* [X]  typeorm
+- [x] vite
+- [x] vue@next
+- [x] typescript
+- [x] pnpm
+- [x] npm package publish
+- [x] commitlint
+- [x] eslint powerd by @antfu/eslint-config
+- [x] unocss powerd by @antfu
+- [x] vitepress
+- [x] changelog
 
 ## Usage
