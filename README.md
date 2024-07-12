@@ -20,7 +20,7 @@
 - Add package folder
 
 ```shell
-cp ./packages/lib ./packages/package-name
+cp -r ./packages/lib ./packages/package-name
 ```
 
 - Modify `package-name` by step
