@@ -7,6 +7,8 @@ const genNavAndSidebar = () => {
     (navAndSidebar, path) => {
       const [_0, _1, text, link] = path.split(sep);
       let _link = link.replace(".md", "");
+      if (_link.startsWith('lib.'))
+          return navAndSidebar
       // nav 只要第一层
       navAndSidebar.nav[text] = navAndSidebar.nav[text]
         ? navAndSidebar.nav[text]
@@ -29,7 +31,7 @@ const genLink = (text, name) => {
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "文档标题",
-  description: "解决常见的开发问题，以及开发环境配置问题",
+  description: "这是文档的描述",
   /* prettier-ignore */
   head: [
     ['link', { rel: 'icon', type: 'image/webp', href: '/logo.svg' }],

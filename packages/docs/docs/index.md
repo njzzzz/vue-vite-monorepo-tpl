@@ -2,11 +2,11 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 title: 文档标题
-titleTemplate: 解决常见的开发问题，以及开发环境配置问题
+titleTemplate: 这是文档的描述
 
 hero:
   name: 文档标题
-  text: 解决常见的开发问题，以及开发环境配置问题
+  text: 这是文档的描述
   tagline:
     不积跬步无以至千里
     # actions:
@@ -20,7 +20,7 @@ hero:
     src: /logo.svg
     alt: nodejs
   # name: "文档标题"
-  # text: "解决常见的开发问题，以及开发环境配置问题"
+  # text: "这是文档的描述"
   # tagline: 不积跬步无以至千里
   # actions:
   #   - theme: brand
@@ -32,14 +32,14 @@ hero:
 
 features:
   - icon: <img src="/js.svg">
-    title: 前端
-    details: HTML、CSS、JS
+    title: 小标题
+    details: 小标题
   - icon: <img src="/nodejs.svg">
-    title: Node
-    details: Node.js
+    title: 小标题
+    details: 小标题
   - icon: <img src="/linux.svg">
-    title: linux macos
-    details: linux  macos 环境 配置
+    title: 小标题
+    details: 小标题
 ---
 
 <style>

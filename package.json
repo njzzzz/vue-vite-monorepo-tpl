@@ -7,14 +7,19 @@
   "main": "index.js",
   "scripts": {
     "fix": "eslint --fix .",
+    "dev": "pnpm -r --parallel dev ",
+    "docs:dev": "pnpm --filter ./packages/docs docs:dev",
+    "docs:build": "pnpm --filter ./packages/docs docs:build",
     "clean:node_modules": "find . -name \"node_modules\" -type d -prune -exec rm -r '{}' + ",
     "build": "pnpm --filter @packages/* run build",
-    "publish-all": "pnpm --filter @packages/* publish --publish-branch release",
-    "dev": "pnpm -r --parallel dev ",
+    "api-docs": "pnpm --filter @packages/* api-docs",
     "bump": "bumpp -r",
-    "changelog": "conventional-changelog -i ./packages/docs/docs/pages/Changelog/index.md -s -r 0"
+    "changelog": "conventional-changelog -n changelog.config.mjs -i ./packages/docs/docs/pages/Changelog/index.md -s -r 0",
+    "publish-all": "pnpm --filter @packages/* publish --access=public --publish-branch release"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.25.3",
+    "@microsoft/api-extractor": "^7.47.0",
     "@antfu/eslint-config": "^2.6.4",
     "@commitlint/cli": "^18.6.0",
     "@commitlint/config-conventional": "^18.6.0",

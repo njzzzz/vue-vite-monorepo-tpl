@@ -30,7 +30,8 @@
   ],
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build -c ./vite.lib.config.ts"
+    "build": "vite build -c ./vite.lib.config.ts",
+    "api-docs": "api-extractor run --local && npx api-documenter markdown -i ./temp -o ../docs/docs/pages/@packages-lib && rm -rf ./temp"
   },
   "dependencies": {
     "vue": "^3.4.15"
